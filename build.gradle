@@ -1,0 +1,62 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.10'
+	id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'spring.ai.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+repositories {
+	mavenCentral()
+
+	maven {
+		//url 'https://oss.sonatype.org/content/repositories/snapshots/'
+		//url 'https://repo1.maven.org/maven2/'
+
+		url 'https://mvnrepository.com/artifact/ai.djl.pytorch/pytorch-engine'
+
+	}
+}
+
+ext {
+	set('springAiVersion', "1.0.0-M6")
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+	implementation 'org.mapstruct:mapstruct:1.6.3'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
+
+	implementation 'com.oracle.database.jdbc:ojdbc11:23.7.0.25.01'
+	implementation 'ai.djl.sentencepiece:sentencepiece:0.32.0'
+	implementation 'ai.djl.pytorch:pytorch-engine:0.32.0' // Necesario para PyTorch
+	implementation 'ai.djl.huggingface:tokenizers:0.32.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.ai:spring-ai-coherence-store-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-oracle-store-spring-boot-starter'
+	implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+dependencyManagement {
+	imports {
+		mavenBom "org.springframework.ai:spring-ai-bom:${springAiVersion}"
+	}
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
