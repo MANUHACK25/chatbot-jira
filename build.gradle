@@ -20,6 +20,13 @@ repositories {
 		//url 'https://oss.sonatype.org/content/repositories/snapshots/'
 		//url 'https://repo1.maven.org/maven2/'
 
+		maven { url 'https://repo.spring.io/milestone' }
+		maven { url 'https://repo.spring.io/snapshot' }
+		maven {
+			name = 'Central Portal Snapshots'
+			url = 'https://central.sonatype.com/repository/maven-snapshots/'
+		}
+
 		url 'https://mvnrepository.com/artifact/ai.djl.pytorch/pytorch-engine'
 
 	}
@@ -30,23 +37,31 @@ ext {
 }
 
 dependencies {
+	implementation files('libs/ojdbc17.jar')
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.4.0'
 
 	implementation 'org.mapstruct:mapstruct:1.6.3'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.6.3'
 
 	implementation 'com.oracle.database.jdbc:ojdbc11:23.7.0.25.01'
+	runtimeOnly('com.oracle.database.jdbc:ojdbc11:23.7.0.25.01')
 	implementation 'ai.djl.sentencepiece:sentencepiece:0.32.0'
 	implementation 'ai.djl.pytorch:pytorch-engine:0.32.0' // Necesario para PyTorch
 	implementation 'ai.djl.huggingface:tokenizers:0.32.0'
 
-	implementation 'org.springframework.boot:spring-boot-starter-web'
+	//implementation 'group.springframework.ai:spring-ai-openai-spring-boot-starter:1.0.0'
+	implementation platform("org.springframework.ai:spring-ai-bom:1.0.0-SNAPSHOT")
+	// Replace the following with the starter dependencies of specific modules you wish to use
+	//implementation 'org.springframework.ai:spring-ai-openai'
+	implementation 'org.springframework.boot:spring-boot-starter-web:3.4.2'
+	//implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.ai:spring-ai-coherence-store-spring-boot-starter'
-	implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
+	//implementation 'org.springframework.ai:spring-ai-mistral-ai-spring-boot-starter'
 	implementation 'org.springframework.ai:spring-ai-ollama-spring-boot-starter'
-	implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
-	implementation 'org.springframework.ai:spring-ai-oracle-store-spring-boot-starter'
-	implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
+	//implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
+	//implementation 'org.springframework.ai:spring-ai-oracle-store-spring-boot-starter'
+	//implementation 'org.springframework.ai:spring-ai-pgvector-store-spring-boot-starter'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
