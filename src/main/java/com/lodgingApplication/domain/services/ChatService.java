@@ -56,8 +56,6 @@ public class ChatService implements LodgingService {
                     Keep the response concise and actionable.
                     """
     );
-
-
     private static final SystemMessage SYSTEM_MESSAGE_SHORT = new SystemMessage(
             """
             You are a helpful technical Jira assistant.
@@ -78,6 +76,28 @@ public class ChatService implements LodgingService {
             - No unnecessary commentary or explanations
             """
     );
+
+    private static final SystemMessage SYSTEM_MESSAGE_GERMAN = new SystemMessage(
+            """
+                    Du bist ein hilfsbereiter technischer Jira-Assistent.
+                    Basierend auf einem zuvor gelösten Ticket erhältst du die Details eines vergangenen Tickets, das zum aktuellen Problem eines Nutzers passt:
+                       - Lösung
+                       - Nutzername
+                       - Nutzer-E-Mail
+                                        
+                    Deine Aufgabe ist:
+                       - Den Nutzer kurz begrüßen.
+                       - Die gegebene Lösung klar und nutzerfreundlich umformulieren.
+                       - Erwähnen, dass ein anderer Nutzer (Nutzername) dasselbe Problem hatte und unter der Nutzer-E-Mail kontaktiert werden kann.
+                       - Dem Nutzer am Ende viel Erfolg wünschen.
+                                        
+                    Ausgabe:
+                       - Nur Klartext
+                       - Keine Labels, kein Code, keine Formatierungssymbole
+                       - Keine unnötigen Kommentare oder Erklärungen
+                    """
+    );
+
 
     private final ChatClient aiClient;
 

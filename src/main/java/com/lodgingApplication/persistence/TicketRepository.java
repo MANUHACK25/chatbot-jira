@@ -67,6 +67,7 @@ public class TicketRepository {
                 mejorTicketId = ticketId;
             }
         }
+        System.out.println("TICKET CON MAYOR SIMILARIDAD: " +  mejorTicketId);
         return mejorTicketId;
     }
 
@@ -106,7 +107,6 @@ public class TicketRepository {
                     t.getLabel(), t.getSolucion() ,t.getUser().getNOMBRE(), t.getUser().getEMAIL());
 
             dtoList.add(dtoObject);
-
         }
         return dtoList;
 
